@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-apply from: "${rootDir}/gradle/java-library.gradle"
+apply from: "${rootDir}/gradle/kotlin-library.gradle"
 
 dependencies {
-    compile project(':extensions')
-    compile project(':abstract-processor')
+    implementation project(':extensions')
+    implementation project(':abstract-processor')
+    compileOnly "com.google.auto.service:auto-service:${app.autoServiceVersion}"
+    kapt "com.google.auto.service:auto-service:${app.autoServiceVersion}"
 }

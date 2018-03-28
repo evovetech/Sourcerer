@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Layne Mobile, LLC
+ * Copyright 2018 evove.tech
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,5 @@
  * limitations under the License.
  */
 
-apply plugin: 'groovy'
-apply from: "${rootDir}/gradle/abstract-library.gradle"
-
-task groovydocJar(type: Jar, dependsOn: groovydoc) {
-    classifier = 'groovydoc'
-    from groovydoc.destinationDir
-    encoding = 'UTF-8'
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-    archives groovydocJar
-}
-
-apply from: "${rootDir}/gradle/install.gradle"
+apply from: "${rootDir}/gradle/java-library.gradle"
+apply from: "${rootDir}/gradle/kotlin.gradle"

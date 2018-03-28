@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-apply from: "${rootDir}/gradle/java-library.gradle"
+apply from: "${rootDir}/gradle/kotlin-library.gradle"
 
 dependencies {
-    compile project(':extensions-annotations')
-    compile project(':io')
+    implementation "com.google.guava:guava:${app.guavaVersion}"
+    api project(':extensions-annotations')
+    api project(':io')
 }

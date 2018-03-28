@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Layne Mobile, LLC
+ * Copyright 2018 evove.tech
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,22 @@
  * limitations under the License.
  */
 
-apply plugin: 'java'
-apply from: "${rootDir}/gradle/abstract-library.gradle"
+apply plugin: 'java-library'
+
+pom.packaging = 'jar'
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+//    encoding = 'UTF-8'
+}
 
 artifacts {
     archives sourcesJar
     archives javadocJar
 }
-
-apply from: "${rootDir}/gradle/install.gradle"

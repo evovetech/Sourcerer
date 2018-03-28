@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Layne Mobile, LLC
+ * Copyright 2018 evove.tech
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,22 @@
  * limitations under the License.
  */
 
-apply from: "${rootDir}/gradle/kotlin-library.gradle"
+apply plugin: 'kotlin-kapt'
 
-dependencies {
-    implementation "com.google.guava:guava:${app.guavaVersion}"
+final def anp = 'annotationProcessor'
+configurations.all { Configuration c ->
+    def n = c.name
+    if (n.startsWith(anp)) {
+        def len = anp.length()
+        def name = 'kapt'
+        if (n.length() > len) {
+            name += n.substring(n, n.length())
+        }
+        c.dependencies.all { Dependency d ->
+            configurations.getByName(name)?.identity { kapt ->
+                kapt.dependencies.add(d)
+                c.dependencies.remove(d)
+            }
+        }
+    }
 }

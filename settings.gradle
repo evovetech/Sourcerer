@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Layne Mobile, LLC
+ * Copyright 2018 evove.tech
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
+ pluginManagement {
+     apply from: 'gradle/settings.gradle'
+     app.configurePlugins(it)
+ }
+
 include ':sourcerer-io',
         ':sourcerer-abstract-processor',
         ':sourcerer-extensions',
         ':sourcerer-extensions-annotations',
         ':sourcerer-extensions-processor',
         ':sourcerer-extensions-test-processor',
-        ':sourcerer-extensions-plugin',
+//        ':sourcerer-extensions-plugin',
         ':sourcerer-extensions-sample-lib',
         ':sourcerer-extensions-sample-lib-annotations'
-
-rootProject.name = 'com.laynemobile.sourcerer'
 
 findProject(':sourcerer-io')?.name = 'io'
 findProject(':sourcerer-abstract-processor')?.name = 'abstract-processor'
@@ -32,6 +35,6 @@ findProject(':sourcerer-extensions')?.name = 'extensions'
 findProject(':sourcerer-extensions-annotations')?.name = 'extensions-annotations'
 findProject(':sourcerer-extensions-processor')?.name = 'extensions-processor'
 findProject(':sourcerer-extensions-test-processor')?.name = 'extensions-test-processor'
-findProject(':sourcerer-extensions-plugin')?.name = 'extensions-plugin'
+//findProject(':sourcerer-extensions-plugin')?.name = 'extensions-plugin'
 findProject(':sourcerer-extensions-sample-lib')?.name = 'extensions-sample-lib'
 findProject(':sourcerer-extensions-sample-lib-annotations')?.name = 'extensions-sample-lib-annotations'

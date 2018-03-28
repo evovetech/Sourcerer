@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-apply from: "${rootDir}/gradle/java-library.gradle"
+apply from: "${rootDir}/gradle/kotlin-library.gradle"
 
 dependencies {
-    compile "com.google.guava:guava:${appGuavaVersion}"
-    compile "com.squareup:javapoet:${appJavaPoetGradleVersion}"
-    compile "com.squareup.okio:okio:${appOkioVersion}"
+    implementation "com.google.guava:guava:${app.guavaVersion}"
+    api "com.squareup:javapoet:${app.javaPoetVersion}"
+    api "com.squareup.okio:okio:${app.okioVersion}"
 }

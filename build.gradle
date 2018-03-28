@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Layne Mobile, LLC
+ * Copyright 2018 evove.tech
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 ext {
-    sourceCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_1_8
     LICENSES = ['Apache-2.0']
     LABELS = ['java', 'sourcerer', 'extensions']
 }
@@ -27,16 +27,15 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${appGradleBintrayPluginVersion}"
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${appGradleBuildInfoExtractorVersion}"
-        classpath "com.neenbedankt.gradle.plugins:android-apt:${appGradleAptVersion}"
-        classpath "com.netflix.nebula:gradle-extra-configurations-plugin:${appGradleNebulaVersion}"
-        classpath "com.squareup:javapoet:${appJavaPoetGradleVersion}"
-        classpath "com.squareup.okio:okio:${appOkioVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${app.kotlinVersion}"
+//        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${appGradleBintrayPluginVersion}"
+//        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${appGradleBuildInfoExtractorVersion}"
+//        classpath "com.squareup:javapoet:${appJavaPoetGradleVersion}"
+//        classpath "com.squareup.okio:okio:${appOkioVersion}"
     }
 }
 
-apply from: "${rootDir}/gradle/artifactory.gradle"
+//apply from: "${rootDir}/gradle/artifactory.gradle"
 
 // brittle but works
 def isReleaseBuild = gradle.startParameter.taskNames.contains('bintrayUpload')
@@ -44,21 +43,4 @@ allprojects {
     group = GROUP
     version = isReleaseBuild ? VERSION_NAME : "$VERSION_NAME-SNAPSHOT"
     logger.info("Project ${it.name} using version=${it.version}")
-}
-
-subprojects {
-    repositories {
-        jcenter()
-        mavenLocal()
-    }
-
-    configurations {
-        testCompile
-    }
-
-    dependencies {
-        // testing
-        testCompile "junit:junit:${appJunitVersion}"
-        testCompile "org.mockito:mockito-core:${appMockitoVersion}"
-    }
 }

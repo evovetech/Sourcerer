@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Layne Mobile, LLC
+ * Copyright 2018 evove.tech
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,13 @@
  * limitations under the License.
  */
 
-ext {
-    POM_PACKAGING = 'jar'
-}
+apply plugin: 'kotlin'
+apply from: "${rootDir}/gradle/kapt.gradle"
 
-apply plugin: 'provided-base'
-apply plugin: 'maven'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.jfrog.artifactory'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
-sourceCompatibility = rootProject.ext.sourceCompatibility
-targetCompatibility = rootProject.ext.sourceCompatibility
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource.srcDirs
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-    encoding = 'UTF-8'
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${app.kotlinVersion}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:${app.kotlinVersion}"
 }

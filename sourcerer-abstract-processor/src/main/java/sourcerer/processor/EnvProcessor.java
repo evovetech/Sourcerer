@@ -32,7 +32,8 @@ public abstract class EnvProcessor<E extends Env> extends AbstractProcessor {
 
     private final AtomicReference<E> env = new AtomicReference<>();
 
-    @Override public final synchronized void init(ProcessingEnvironment processingEnvironment) {
+    @Override
+    public final synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
         env.compareAndSet(null, createEnv(new Env(processingEnvironment)));
         init(env.get());
@@ -44,9 +45,11 @@ public abstract class EnvProcessor<E extends Env> extends AbstractProcessor {
         // subclass override
     }
 
-    @Override public abstract Set<String> getSupportedAnnotationTypes();
+    @Override
+    public abstract Set<String> getSupportedAnnotationTypes();
 
-    @Override public SourceVersion getSupportedSourceVersion() {
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
         return SourceVersion.latestSupported();
     }
 
@@ -82,7 +85,8 @@ public abstract class EnvProcessor<E extends Env> extends AbstractProcessor {
         }
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("supportedAnnotationTypes", getSupportedAnnotationTypes())
                 .toString();
